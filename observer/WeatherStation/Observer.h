@@ -46,7 +46,8 @@ public:
 	void NotifyObservers() override
 	{
 		T data = GetChangedData();
-		for (auto & observer : m_observers)
+		std::set<ObserverType *> workCopyObservers = m_observers;
+		for (auto & observer : workCopyObservers)
 		{
 			observer->Update(data);
 		}
